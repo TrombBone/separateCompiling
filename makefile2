@@ -1,0 +1,17 @@
+AR = riscv64-unknown-elf-ar.exe
+CC = riscv64-unknown-elf-gcc.exe
+
+output: main.o lib.a
+	$(CC) main.o lib.a -o a.out
+
+main.o: main.c
+	$(CC) -c main.c
+
+lib.a: sort.o sort.h
+	$(AR) -rsc lib.a sort.o
+
+sort.o:
+	$(CC) -c sort.c
+
+clean:
+	rm *.o *.a a.out
